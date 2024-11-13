@@ -1,3 +1,4 @@
+import allure
 from selenium.webdriver.common.by import By
 from selenium.webdriver.remote.webdriver import WebDriver
 from selenium.webdriver.support.ui import WebDriverWait
@@ -7,45 +8,55 @@ class CartPage:
     def __init__(self, driver: WebDriver):
         self.driver = driver
 
-    CART = (By.CSS_SELECTOR, "span.header-cart.sticky-header__controls-item")
-    QUANTITY_BUTTON = (By.CSS_SELECTOR, "button.product-quantity__button.product-quantity__button--right") 
-    DELETE_BUTTON = (By.CSS_SELECTOR, "button.cart-item__actions-button.cart-item__actions-button--delete.light-blue") 
-    BUY_BUTTON = (By.CSS_SELECTOR, "div.button.action-button.blue")
-    CHECKOUT_BUTTON = (By.CSS_SELECTOR, "div.button.action-button.blue.action-button--in-cart")
+    @allure.step("Добавить товар в корзину")
+    def add_to_cart(self) -> None:
 
-    def open_cart(self):
-        """Открывает корзину."""
-        cart_icon = WebDriverWait(self.driver, 10).until(
-            EC.element_to_be_clickable(self.CART)
-        )
-        cart_icon.click()
-
-    def add_to_cart(self):
         """Добавляет товар в корзину."""
-        buy_button = WebDriverWait(self.driver, 10).until(
-            EC.element_to_be_clickable(self.BUY_BUTTON)
-        )
+
+        buy_button = self.driver.find_element(By.CSS_SELECTOR, "div.button.action-button.blue") 
         buy_button.click()
 
-        checkout_button = WebDriverWait(self.driver, 10).until(
-            EC.element_to_be_clickable(self.CHECKOUT_BUTTON)
-        )
-        checkout_button.click()
+    @allure.step("Открыть корзину")
+    def open_cart(self) -> None:
 
-    def increase_quantity(self):
-        """Увеличивает количество товара."""
-        increase_button = WebDriverWait(self.driver, 10).until(
-            EC.element_to_be_clickable(self.QUANTITY_BUTTON)
-        )
-        increase_button.click()
+        """Открывает корзину."""
 
-    def remove_item(self):
+        cart_icon =  WebDriverWait(self.driver, 20).until( 
+            EC.element_to_be_clickable((By.CSS_SELECTOR, "a[href='/cart']")) 
+        ) 
+        cart_icon.click()
+  
+    @allure.step("Увеличить количество товара до {quantity}")
+    def increase_quantity(self, target_quantity: int = 2) -> None:
+
+        """Увеличивает количество товара до заданного значения.
+        
+        :param quantity: Целевое количество товара
+        """
+
+        current_quantity = int(self.driver.find_element(By.CSS_SELECTOR, "input.product-quantity__input").get_attribute("value"))
+        for _ in range(target_quantity - current_quantity):
+            increase_button = self.driver.find_element(By.CSS_SELECTOR, "button.product-quantity__button--right")
+            increase_button.click()
+
+    @allure.step("Удалить товар из корзины")
+    def remove_item(self) -> None:
+
         """Удаляет товар из корзины."""
-        delete_button = WebDriverWait(self.driver, 10).until(
-            EC.element_to_be_clickable(self.DELETE_BUTTON)
-        )
+
+        delete_button = self.driver.find_element(By.CSS_SELECTOR, "button.cart-item__actions-button--delete")
         delete_button.click()
 
+    @allure.step("Проверить, что корзина пуста")
     def is_cart_empty(self) -> bool:
-        """Проверяет, что корзина пуста."""
-        return "Корзина пуста" in self.driver.page_source
+        
+        """Проверяет, что корзина пуста.
+        
+        :return: True, если корзина пуста, иначе False
+        """
+        try:
+            # Проверяем наличие элемента с сообщением о пустой корзине
+            empty_message = self.driver.find_element(By.CSS_SELECTOR, "div.empty-title")
+            return empty_message.is_displayed()
+        except:
+            return False
