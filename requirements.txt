@@ -1,0 +1,6 @@
+selenium
+webdriver_manager
+pytest
+allure-pytest
+flake8
+max-line-lenght = 999;
