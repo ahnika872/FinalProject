@@ -1,0 +1,20 @@
+[
+  "tests/test_api.py::test_add_product_to_cart",
+  "tests/test_api.py::test_get_cart_total",
+  "tests/test_api.py::test_remove_product_from_cart",
+  "tests/test_api.py::test_update_product_quantity",
+  "tests/test_api.py::test_view_cart",
+  "tests/test_ui.py::test_add_and_modify_cart",
+  "tests/test_ui.py::test_add_and_modify_cart1",
+  "tests/test_ui.py::test_add_and_modify_cart2",
+  "tests/test_ui.py::test_add_book",
+  "tests/test_ui.py::test_add_book_to_cart",
+  "tests/test_ui.py::test_add_harry_potter_to_wishlist",
+  "tests/test_ui.py::test_catalog_and_select_product",
+  "tests/test_ui.py::test_delete_book",
+  "tests/test_ui.py::test_quantity_book",
+  "tests/test_ui.py::test_remove_book_from_cart",
+  "tests/test_ui.py::test_search_and_update_results",
+  "tests/test_ui.py::test_search_non_existent_book",
+  "tests/test_ui.py::test_update_book_quantity_in_cart"
+]

@@ -82,7 +82,6 @@ def test_get_cart_total():
         # Проверка, что в корзине есть товары
         assert len(cart_items) > 0
         # Подсчет общего количества товаров
-        # Подсчет общего количества товаров
         total_quantity = sum(item["quantity"] for item in cart_items)
         assert total_quantity > 0, "Общее количество товаров должно быть больше нуля"
         # Проверка общей стоимости

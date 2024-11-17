@@ -1,0 +1,21 @@
+{
+  "tests/test_ui.py::test_catalog_and_select_product": true,
+  "tests/test_ui.py::test_add_and_modify_cart": true,
+  "tests/test_ui.py::test_add_and_modify_cart2": true,
+  "tests/test_ui.py::test_add_and_modify_cart3": true,
+  "tests/test_ui.py::test_add_and_modify_cart1": true,
+  "tests/test_ui.py::test_quantity_book": true,
+  "tests/test_api.py::test_add_product_to_cart": true,
+  "tests/test_api.py::test_update_product_quantity": true,
+  "tests/test_api.py::test_view_cart": true,
+  "tests/test_api.py::test_remove_product_from_cart": true,
+  "tests/test_api.py::test_get_cart_total": true,
+  "tests/test_ui.py::test_search_and_update_results": true,
+  "tests/test_ui.py::test_search_non_existent_book": true,
+  "tests/test_ui.py::test_add_book": true,
+  "tests/test_ui.py::test_delete_book": true,
+  "tests/test_ui.py::test_add_harry_potter_to_wishlist": true,
+  "tests/test_ui.py::test_add_book_to_cart": true,
+  "tests/test_ui.py::test_update_book_quantity_in_cart": true,
+  "tests/test_ui.py::test_remove_book_from_cart": true
+}

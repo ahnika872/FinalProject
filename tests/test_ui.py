@@ -78,3 +78,57 @@ def test_add_harry_potter_to_wishlist(browser: WebDriver):
     browser.get(base_url)
     with allure.step("Добавление книги 'Гарри Поттер и философский камень' в список желаемого"):
         assert search_page.add_to_favorites
+
+
+###### TEST CART
+
+
+@allure.title("Добавление книги в корзину")
+@allure.feature("Корзина")
+def test_add_book_to_cart(browser: WebDriver):
+    """Тест добавления книги в корзину."""
+    browser.get(base_url)
+    cart_page = CartPage(browser)
+
+    with allure.step("Добавление первой книги в корзину"):
+        cart_page.add_first_book_to_cart()
+
+    with allure.step("Проверка, что книга добавлена в корзину"):
+        assert cart_page.is_book_added_to_cart(), "Книга не добавлена в корзину."
+
+
+@allure.title("Изменение количества книги в корзине")
+@allure.feature("Корзина")
+def test_update_book_quantity_in_cart(browser: WebDriver):
+    """Тест изменения количества книг в корзине."""
+    browser.get(base_url)
+    cart_page = CartPage(browser)
+
+    with allure.step("Добавление книги в корзину"):
+        cart_page.add_first_book_to_cart()
+
+    with allure.step("Открыть корзину"):
+        cart_page.open_cart()
+        
+    with allure.step("Изменение количества книги"):
+        cart_page.update_quantity_in_cart(2)
+
+    with allure.step("Проверка нового количества"):
+        assert cart_page.get_book_quantity() == 2, "Количество книг в корзине не обновлено."
+
+
+@allure.title("Удаление книги из корзины")
+@allure.feature("Корзина")
+def test_remove_book_from_cart(browser: WebDriver):
+    """Тест удаления книги из корзины."""
+    browser.get(base_url)
+    cart_page = CartPage(browser)
+
+    with allure.step("Добавление книги в корзину"):
+        cart_page.add_first_book_to_cart()
+
+    with allure.step("Удаление книги из корзины"):
+        cart_page.remove_book_from_cart()
+
+    with allure.step("Проверка, что корзина пуста"):
+        assert cart_page.is_cart_empty(), "Корзина не пуста."

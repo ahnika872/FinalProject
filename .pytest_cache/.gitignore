@@ -1,0 +1,27 @@
+# Исключение папок с байт-кодами
+__pycache__/
+
+# Логи тестов и временные файлы
+*.log
+*.tmp
+*.out
+
+# Конфигурации IDE/редактора
+.idea/
+.vscode/
+
+# Результаты тестов Allure
+allure-results/
+allure-report/
+
+# Исключение зависимостей виртуального окружения
+env/
+venv/
+
+# Кэш pip
+*.egg-info/
+pip-log.txt
+
+# Системные файлы
+.DS_Store
+Thumbs.db
